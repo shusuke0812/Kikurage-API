@@ -11,4 +11,10 @@ func routes(_ app: Application) throws {
         }
         return "\(number) is a great number"
     }
+    
+    app.get("user") { req in
+        let greeting = try req.content.decode(User.self)
+        print(greeting.name)
+        return HTTPStatus.ok
+    }
 }
