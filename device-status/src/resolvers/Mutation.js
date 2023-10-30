@@ -1,4 +1,4 @@
-const auth = required('../auth')
+const auth = require('../auth')
 required('dotenv').config()
 
 var _id = 0
