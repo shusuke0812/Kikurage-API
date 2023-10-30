@@ -25,6 +25,17 @@ var photos = [
 ]
 
 module.exports = {
-    totalPhotos: () => photos.length,
-    allPhotos: () => photos
+    // Mock
+    //totalPhotos: () => photos.length,
+    //allPhotos: () => photos,
+
+    // MongoDB
+    totalPhotos: (parent, args, { db }) => 
+        db.collection(`db`).estimatedDocumentCount(),
+    allPhotos: (parent, args, { db }) =>
+        db.collection(`photos`).find().toArray(),
+    totalUsers: (parent, args, { db }) =>
+        db.collection(`users`).estimatedDocumentCount(),
+    allUsers: (parent, args, { db }) =>
+        db.collection(`users`).find().toArray()
 }
