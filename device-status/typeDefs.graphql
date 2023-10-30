@@ -1,5 +1,5 @@
 type User {
-    githubLogin: ID!
+    gitubLogin: ID!
     name: String
     avatar: String
     postedPhotos: [Photo!]!
@@ -41,4 +41,10 @@ input PostPhotoInput {
 
 type Mutation {
     postPhoto(input: PostPhotoInput!): Photo!
+    githubAuth(code: String!): AuthPayload!
+}
+
+type AuthPayload {
+    token: String!
+    user: User!
 }
