@@ -1,5 +1,5 @@
-import { fetch } from 'node-fetch';
-import { fs } from 'fs';
+const fetch = require('node-fetch');
+const fs = require('fs');
 
 function requestToken(credentials) {
     return fetch(
@@ -25,10 +25,10 @@ function requestUserAccount(token) {
         .catch(throwError)
 }
 
-module.exports = {
-    async authorize(credentials) {
-        const { access_token } = await requestToken(credentials)
-        const user = await requestUserAccount(access_token)
-        return { ...user, access_token }
-    }
+const authorizeWithGitHub = async credentials => {
+    const { access_token } = await requestToken(credentials)
+    const user = await requestUserAccount(access_token)
+    return { ...user, access_token }
 }
+
+module.exports = { authorizeWithGitHub }
