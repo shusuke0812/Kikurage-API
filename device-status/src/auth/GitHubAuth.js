@@ -1,5 +1,5 @@
-const fetch = require('node-fetch')
-const fs = require('fs')
+import { fetch } from 'node-fetch';
+import { fs } from 'fs';
 
 function requestToken(credentials) {
     return fetch(
