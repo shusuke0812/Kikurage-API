@@ -1,5 +1,5 @@
 const auth = require('../auth')
-required('dotenv').config()
+require('dotenv').config()
 
 var _id = 0
 
