@@ -20,13 +20,24 @@ function requestToken(credentials) {
 }
 
 function requestUserAccount(token) {
-    return fetch('https://api.github.com/user?access_token=${token}')
-        .then(toJSON)
-        .catch(throwError)
+    return fetch(
+        `https://api.github.com/user`,
+        {
+            method: 'GET',
+            headers: {
+                'Authorization': `token ${token}`
+            }
+        }
+    )
+    .then(res => res.json())
+    .catch(error => {
+        throw new Error(JSON.stringify(error))
+    })
 }
 
 const authorizeWithGitHub = async credentials => {
     const { access_token } = await requestToken(credentials)
+    console.log(`access_token=${access_token}`)
     const user = await requestUserAccount(access_token)
     return { ...user, access_token }
 }
