@@ -1,4 +1,4 @@
-const { GraphQLScalarType } = require("graphql")
+const { GraphQLScalarType } = rquire("graphql")
 
 var users = [
     { "githubLogin": "mHattrup", "name": "Mike Hattrup" },
@@ -43,9 +43,10 @@ var photos = [
 
 module.exports = {
     Photo: {
-        url: parent => `http://yoursite.com/img/${parent.id}.jpg`,
-        postedBy: parent => {
-            return users.find(u => u.githubLogin == parent.githubUser)
+        id: parent => parent.id || parent._id,
+        url: parent => `/img/${parent.id}.jpg`,
+        postedBy: (parent, args, { db }) => {
+            db.collection('users').findOne({ githubLogin: parent.userID })
         },
         taggedUsers: parent => tags
             .filter(tag => tag.photoID === parent.id)
