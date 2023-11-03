@@ -29,6 +29,8 @@ module.exports = {
     //totalPhotos: () => photos.length,
     //allPhotos: () => photos,
 
+    me: (parent, args, { currentUser }) => currentUser,
+
     // MongoDB
     totalPhotos: (parent, args, { db }) => 
         db.collection(`db`).estimatedDocumentCount(),
