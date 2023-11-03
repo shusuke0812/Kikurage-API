@@ -1,16 +1,21 @@
 const auth = require('../auth')
 require('dotenv').config()
 
-var _id = 0
-
 module.exports = {
-    postPhoto(parent, args) {
-        var newPhoto = {
-            id: _id++,
+    async postPhoto(parent, args, { db, currentUser }) {
+        if(!currentUser) {
+            throw new Error('only an authorized user can post a photo')
+        }
+
+        const newPhoto = {
             ...args.input,
+            userID: currentUser.githubLogin,
             created: Date()
         }
-        photos.push(newPhoto)
+        
+        const { insertedIds } = await db.collection('photos').insert(newPhoto)
+        newPhoto.id = insertedIds[0]
+
         return newPhoto
     },
 
