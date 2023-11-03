@@ -37,7 +37,6 @@ function requestUserAccount(token) {
 
 const authorizeWithGitHub = async credentials => {
     const { access_token } = await requestToken(credentials)
-    console.log(`access_token=${access_token}`)
     const user = await requestUserAccount(access_token)
     return { ...user, access_token }
 }
