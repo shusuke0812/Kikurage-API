@@ -21,9 +21,9 @@ module.exports = {
             avatar_url,
             login,
             name
-        } = await auth({
+        } = await auth.GitHubAuth.authorizeWithGitHub({
             client_id: process.env.CLIENT_ID,
-            cllient_secret: process.env.CLIENT_SECRET,
+            client_secret: process.env.CLIENT_SECRET,
             code
         })
 
@@ -39,7 +39,7 @@ module.exports = {
         }
 
         const { ops:[user] } = await db
-            .collection('user')
+            .collection('users')
             .replaceOne({ githubLogin: login }, latestUserInfo, { upsert: true })
 
         return { user, token: access_token }
