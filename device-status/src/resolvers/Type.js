@@ -1,4 +1,4 @@
-const { GraphQLScalarType } = rquire("graphql")
+const { GraphQLScalarType } = require("graphql")
 
 var users = [
     { "githubLogin": "mHattrup", "name": "Mike Hattrup" },
