@@ -10,3 +10,8 @@
 - M5Stack temperature
 - M5Stack humidity
 - M5Stack battery SOC
+
+## Reference
+
+- [Learning GraphQL](https://www.oreilly.com/library/view/learning-graphql/9781492030706/)
+- [Learning GraphQL Repository](https://github.com/MoonHighway/learning-graphql)
