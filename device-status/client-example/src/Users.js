@@ -3,6 +3,7 @@ import { Query } from 'react-apollo'
 import { ROOT_QUERY } from './App'
 
 const Users = () =>
+    //<Query query={ROOT_QUERY} pollInterval={1000}> //NOTE: polling [ms]
     <Query query={ROOT_QUERY}>
         {({ data, loading, fetch }) => loading ?
             <p>loading users ...</p> :
