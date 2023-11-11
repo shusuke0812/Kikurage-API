@@ -63,7 +63,9 @@ module.exports = {
             githubToken: r.login.sha1
         }))
 
-        await db.collection(`users`).insert(users)
+        console.log('insert fake users=', users)
+
+        await db.collection('users').insertMany(users)
         return users
     }
 }
