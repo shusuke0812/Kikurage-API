@@ -6,12 +6,12 @@ import { ROOT_QUERY } from './App'
 const Users = () =>
     //<Query query={ROOT_QUERY} pollInterval={1000}> //NOTE: polling [ms]
     <Query query={ROOT_QUERY}>
-        {({ data, loading, fetch }) => loading ?
+        {({ data, loading, refetch }) => loading ?
             <p>loading users ...</p> :
             <UserList
                 count={data.totalUsers}
                 users={data.allUsers}
-                fetchUsers={fetch} />
+                refetchUsers={refetch} />
         }
     </Query>
 
