@@ -11,6 +11,34 @@
 - M5Stack humidity
 - M5Stack battery SOC
 
+## Start debug
+1. MogoDB start
+
+```bash
+# Check running of MongoDB
+$ brew services list
+
+# Start
+$ brew services start mongodb-community
+
+# Stop
+$ brew services stop mongodb-community
+```
+
+2. Run GraphQL server
+
+```bash
+$ cd ./device-status
+$ npm start
+```
+
+**other tips**
+
+```bash
+# Start MongoDB shell
+$ modosh
+```
+
 ## Reference
 
 - [Learning GraphQL](https://www.oreilly.com/library/view/learning-graphql/9781492030706/)
