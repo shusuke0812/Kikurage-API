@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Query, Mutation } from 'react-apollo'
+import { Query, Mutation, withApollo } from 'react-apollo'
+import { compose } from 'recompose'
 import { gql } from 'apollo-boost'
 import { ROOT_QUERY } from './App'
 import dotenv from 'dotenv'
@@ -22,6 +23,13 @@ class AuthorizedUSer extends Component {
             //alert(code)
             //this.props.history.replace('/')
         }
+    }
+
+    logout = () => {
+        localStorage.removeItem('token')
+        let data = this.props.client.readQuery({ query: ROOT_QUERY })
+        data.me = null
+        this.props.client.writeQuery({ query: ROOT_QUERY })
     }
 
     requestCode() {
@@ -73,4 +81,4 @@ const CurrentUser = ({ name, avatar, logout }) =>
         <button onClick={logout}>logout</button>
     </div>
 
-export default withRouter(AuthorizedUSer)
+export default compose(withApollo, withRouter)(AuthorizedUSer)
