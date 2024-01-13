@@ -50,3 +50,7 @@ type AuthPayload {
     token: String!
     user: User!
 }
+
+type Subscription {
+    newPhoto: Photo!
+}
