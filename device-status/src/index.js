@@ -1,5 +1,5 @@
 const { createServer } = require('http')
-const { ApolloServer } = require(`apollo-server-express`)
+const { ApolloServer, PubSub } = require(`apollo-server-express`)
 const express = require(`express`)
 const expressPlayground = require(`graphql-playground-middleware-express`).default
 const { readFileSync } = require(`fs`)
@@ -14,6 +14,7 @@ const { create } = require('domain')
 async function start() {
     const app = express()
     const MONGO_DB = process.env.DB_HOST
+    const pubsub = new PubSub()
     const client = await MongoClient.connect(
         MONGO_DB,
     )
@@ -24,10 +25,10 @@ async function start() {
     const server = new ApolloServer({
         typeDefs,
         resolvers,
-        context: async ({ req }) => {
-            const githubToken = req.headers.authorization
+        context: async ({ req, connection }) => {
+            const githubToken = req ? req.headers.authorization : connection.context.Authorization
             const currentUser = await db.collection('users').findOne({ githubToken })
-            return { db, currentUser }
+            return { db, currentUser, pubsub }
         }
     })
 
