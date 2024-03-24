@@ -1,0 +1,39 @@
+version: '3'
+services:
+  # MySQL
+  db:
+    image: mysql:8.0.23
+    platform: linux/amd64
+    ports:
+      - "3306:3306"
+    container_name: kikurage_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/sql:/docker-entrypoint-initdb.d
+  # Redis
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    container_name: kikurage_redis
+    volumes:
+      - "./redis:/data"
+  # Swagger
+  swagger-editor:
+    image: swaggerapi/swagger-editor
+    container_name: kikurage_swagger_editor
+    ports:
+      - "8002:8080"
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: kikurage_swagger_ui
+    ports:
+      - "8003:8080"
+    volumes:
+      - ./openapi.yml:/openapi/openapi.yml
+    environment:
+      - SWAGGER_JSON=/openapi/openapi.yml
