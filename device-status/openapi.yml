@@ -1,0 +1,91 @@
+openapi: 3.0.3
+info:
+  version: 0.1.0
+  title: Kikurage Device Status API
+  description: |
+    Data: Device Status, User information 
+
+    Client: Mobile app, Device(M5Stack)
+servers:
+  - url: 'http://localhost:8080'
+tags:
+  - name: DeviceStatusController
+  - name: DeviceStatusGraphController
+  - name: UserController
+  - name: UserCultivationController
+  - name: UserRecipeController
+paths:
+  /{deviceId}/status:
+    get:
+      tags:
+        - DeviceStatusController
+      summary: for mobile app
+      description: Return your device latest status
+      parameters:
+        - in: path
+          name: deviceId
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: Device unique ID, which is pasted with label in M5Stack device
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceStatus'
+    post:
+      tags:
+        - DeviceStatusController
+      summary: for M5Stack
+  /{deviceId}/status/graph:
+    get:
+      tags:
+        - DeviceStatusGraphController
+      summary: for mobile app
+      description: Return your latest weekly status of the device
+      parameters:
+        - in: path
+          name: deviceId
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: Device unique ID, which is pasted with label in M5Stack device
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+components:
+  schemas:
+    DeviceStatus:
+      type: object
+      required:
+        - temperature
+        - humidity
+        - message
+        - type
+        - advice
+      properties:
+        temperature:
+          type: integer
+          example: 30
+        humidity:
+          type: integer
+          example: 60
+        message:
+          type: string
+          example: "喉が渇いたよ"
+        type:
+          type:
+            $ref: '#/components/schemas/DeviceStatusType'
+          example: "wet"
+    DeviceStatusType:
+      type: string
+      enum:
+        - normal
+        - wet
+        - dry
