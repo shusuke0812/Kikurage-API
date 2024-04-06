@@ -23,7 +23,7 @@ $ docker-compose up -d
 
 **ER Diagram**
 
-TBD
+<img width="600" src="https://github.com/shusuke0812/Kikurage-API/assets/33107697/80a9bcd9-11a3-4d9c-92c5-035bd53315d9">
 
 **API Architecture**
 - Kotlin / Spring Boot

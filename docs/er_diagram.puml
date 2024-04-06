@@ -1,0 +1,82 @@
+@startuml kikurage_platform
+    ' ***** Device tables
+    entity device_status as "device_status" {
+        * device_id CHAR(20) [PK]
+        --
+        temperature INTEGER
+        humidity INTEGER
+        status_type_id CHAR(2) [FK]
+    }
+    entity device_status_graph as "device_status_graph" {
+        * id INTEGER [PK]
+        --
+        * device_id CHAR(20) [FK]
+        temperature INTEGER
+        humidity INTEGER
+        date DATE
+        week CHAR(3)
+    }
+    entity device_status_type as "device_status_type" {
+        * id CHAR(2) [PK]
+        --
+        name VARCHAR
+    }
+
+    ' ***** User tables
+    entity user as "user" {
+        * id INTEGER [PK]
+        --
+        device_id CHAR(20) [FK]
+        emal VARCHAR
+        password CHAR
+        name VARCHAR
+        created_at DATE
+        updated_at DATE
+    }
+    entity user_cultivation as "user_cultivation" {
+        * id INTEGER [PK]
+        --
+        user_id INTEGER [FK]
+        cultivation_id INTEGER [FK]
+    }
+    entity cultivation as "cultivation" {
+        * id INTEGER [PK]
+        --
+        memo VARCHAR(256)
+        image_path_1 CHAR
+        image_path_2 CHAR
+        image_path_3 CHAR
+        image_path_4 CHAR
+        image_path_5 CHAR
+        image_path_6 CHAR
+        image_path_7 CHAR
+        image_path_8 CHAR
+        record_date DATE
+        created_at DATE
+        updated_at DATE
+    }
+    entity user_recipe as "user_recipe" {
+        * id INTEGER [PK]
+        --
+        user_id INTEGER [FK]
+        recipe_id INTEGER [FK]
+    }
+    entity recipe as "recipe" {
+        * id INTEGER [PK]
+        --
+        memo VARCHAR(256)
+        image_path CHAR
+        record_date DATE
+        created_at DATE
+        updated_at DATE
+    }
+
+    ' ***** Relationship
+    user |o-- device_status
+    device_status ||-l-o| device_status_type
+    device_status ||--o{ device_status_graph
+    user |o--o{ user_cultivation
+    user_cultivation |o-d-o{ cultivation
+    user |o--o{ user_recipe
+    user_recipe |o-d-o{ recipe
+@enduml
