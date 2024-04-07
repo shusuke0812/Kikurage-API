@@ -27,7 +27,7 @@
         * id INTEGER [PK]
         --
         device_id CHAR(20) [FK]
-        emal VARCHAR
+        email VARCHAR
         password CHAR
         name VARCHAR
         created_at DATE
