@@ -5,7 +5,7 @@
         --
         temperature INTEGER
         humidity INTEGER
-        status_type_id CHAR(2) [FK]
+        status_type ENUM('NORMAL', 'WET', 'DRY')
     }
     entity device_status_graph as "device_status_graph" {
         * id INTEGER [PK]
@@ -16,20 +16,16 @@
         date DATE
         week CHAR(3)
     }
-    entity device_status_type as "device_status_type" {
-        * id CHAR(2) [PK]
-        --
-        name VARCHAR
-    }
 
     ' ***** User tables
     entity user as "user" {
         * id INTEGER [PK]
         --
         device_id CHAR(20) [FK]
-        email VARCHAR
-        password CHAR
-        name VARCHAR
+        email VARCHAR(256) UNIQUE
+        password VARCHAR(128)
+        name VARCHAR(32)
+        role_type ENUM('ADMIN', 'USER')
         created_at DATE
         updated_at DATE
     }
@@ -73,7 +69,6 @@
 
     ' ***** Relationship
     user |o-- device_status
-    device_status ||-l-o| device_status_type
     device_status ||--o{ device_status_graph
     user |o--o{ user_cultivation
     user_cultivation |o-d-o{ cultivation
