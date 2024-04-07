@@ -1,7 +1,7 @@
 @startuml kikurage_platform
     ' ***** Device tables
     entity device_status as "device_status" {
-        * device_id CHAR(20) [PK]
+        * device_id INTEGER [PK]
         --
         temperature INTEGER
         humidity INTEGER
@@ -10,7 +10,7 @@
     entity device_status_graph as "device_status_graph" {
         * id INTEGER [PK]
         --
-        * device_id CHAR(20) [FK]
+        * device_id INTEGER [FK]
         temperature INTEGER
         humidity INTEGER
         date DATE
@@ -21,7 +21,7 @@
     entity user as "user" {
         * id INTEGER [PK]
         --
-        device_id CHAR(20) [FK]
+        device_id INTEGER [FK]
         email VARCHAR(256) UNIQUE
         password VARCHAR(128)
         name VARCHAR(32)
