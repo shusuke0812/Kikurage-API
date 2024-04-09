@@ -3,12 +3,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "3.1.10"
 	id("io.spring.dependency-management") version "1.1.4"
-	id("com.arenagod.gradle.MybatisGenerator") version "1.4"
+	id("com.thinkimi.gradle.MybatisGenerator") version "2.4"
 	kotlin("jvm") version "1.8.22"
 	kotlin("plugin.spring") version "1.8.22"
 }
 
-group = "com.shusuke.kikurage"
+group = "com.shusuke.kikurage.devicestatus"
 version = "0.0.1-SNAPSHOT"
 
 java {
