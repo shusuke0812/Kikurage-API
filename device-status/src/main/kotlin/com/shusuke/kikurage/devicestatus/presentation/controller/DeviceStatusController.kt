@@ -2,13 +2,10 @@ package com.shusuke.kikurage.devicestatus.presentation.controller
 
 import com.shusuke.kikurage.devicestatus.application.DeviceStatusService
 import com.shusuke.kikurage.devicestatus.presentation.form.GetDeviceStatusResponse
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/{device_id/status}")
+@RequestMapping("/{device_id}/status")
 class DeviceStatusController(
     private val deviceStatusService: DeviceStatusService
 ) {
