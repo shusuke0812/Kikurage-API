@@ -35,11 +35,29 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceStatus'
-    post:
+                $ref: '#/components/schemas/GetDeviceStatusResponse'
+    put:
       tags:
         - DeviceStatusController
       summary: for M5Stack
+      description: Register device latest status
+      parameters:
+        - in: path
+          name: deviceId
+          scheme:
+            type: integer
+            format: int64
+          required: true
+          description: Device unique ID, which is pasted with label in M5Stack device
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDeviceStatusRequest'
+      responses:
+        '201':
+          description: successful operation
+
   /device/status/{deviceId}/graph:
     get:
       tags:
@@ -61,7 +79,7 @@ paths:
             application/json:
 components:
   schemas:
-    DeviceStatus:
+    GetDeviceStatusResponse:
       type: object
       required:
         - temperature
@@ -84,3 +102,15 @@ components:
         - NORMAL
         - WET
         - DRY
+    RegisterDeviceStatusRequest:
+      type: object
+      required:
+        - temperature
+        - humidity
+      properties:
+        temperature:
+          type: integer
+          example: 25
+        humidity:
+          type: integer
+          example: 70

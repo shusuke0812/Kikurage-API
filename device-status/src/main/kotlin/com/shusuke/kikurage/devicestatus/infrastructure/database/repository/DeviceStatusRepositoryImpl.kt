@@ -1,10 +1,9 @@
 package com.shusuke.kikurage.devicestatus.infrastructure.database.repository
 
+import com.shusuke.kikurage.devicestatus.domain.StatusType
 import com.shusuke.kikurage.devicestatus.domain.model.DeviceStatus
 import com.shusuke.kikurage.devicestatus.domain.repository.DeviceStatusRepository
-import com.shusuke.kikurage.devicestatus.infrastructure.database.mapper.DeviceStatusMapper
-import com.shusuke.kikurage.devicestatus.infrastructure.database.mapper.insert
-import com.shusuke.kikurage.devicestatus.infrastructure.database.mapper.selectByPrimaryKey
+import com.shusuke.kikurage.devicestatus.infrastructure.database.mapper.*
 import com.shusuke.kikurage.devicestatus.infrastructure.database.record.DeviceStatusRecord
 import org.springframework.stereotype.Repository
 
@@ -18,6 +17,10 @@ class DeviceStatusRepositoryImpl(
     }
     override fun register(status: DeviceStatus) {
         deviceStatusMapper.insert(toRecord(status))
+    }
+
+    override fun update(deviceId: Long, temperature: Int, humidity: Int, statusType: StatusType) {
+        deviceStatusMapper.updateByPrimaryKeySelective(DeviceStatusRecord(deviceId, temperature, humidity, statusType))
     }
 
     private fun toModel(record: DeviceStatusRecord): DeviceStatus {

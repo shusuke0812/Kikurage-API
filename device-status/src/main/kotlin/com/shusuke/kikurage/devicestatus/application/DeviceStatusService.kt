@@ -1,5 +1,6 @@
 package com.shusuke.kikurage.devicestatus.application
 
+import com.shusuke.kikurage.devicestatus.domain.StatusType
 import com.shusuke.kikurage.devicestatus.domain.model.DeviceStatus
 import com.shusuke.kikurage.devicestatus.domain.repository.DeviceStatusRepository
 import org.springframework.stereotype.Service
@@ -17,5 +18,12 @@ class DeviceStatusService(
     fun register(deviceStatus: DeviceStatus) {
         deviceStatusRepository.findStatus(deviceStatus.deviceId)?.let { throw IllegalArgumentException("Existing ID: ${deviceStatus.deviceId}") }
         deviceStatusRepository.register(deviceStatus)
+    }
+
+    @Transactional
+    fun update(deviceId: Long, temperature: Int, humidity: Int) {
+        deviceStatusRepository.findStatus(deviceId) ?: throw IllegalArgumentException("Not found Device ID: $deviceId")
+        // TODO: StatusType変換処理を追加
+        deviceStatusRepository.update(deviceId, temperature, humidity, StatusType.NORMAL)
     }
 }
