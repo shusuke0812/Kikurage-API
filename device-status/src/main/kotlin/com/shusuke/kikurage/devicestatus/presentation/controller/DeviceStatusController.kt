@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/{device_id}/status")
+@CrossOrigin(origins = ["http://localhost:8003"], allowCredentials = "true")
 class DeviceStatusController(
     private val deviceStatusService: DeviceStatusService
 ) {
