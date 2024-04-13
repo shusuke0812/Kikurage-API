@@ -5,7 +5,10 @@ import com.shusuke.kikurage.devicestatus.domain.repository.DeviceStatusRepositor
 import com.shusuke.kikurage.devicestatus.infrastructure.database.mapper.DeviceStatusMapper
 import com.shusuke.kikurage.devicestatus.infrastructure.database.mapper.selectByPrimaryKey
 import com.shusuke.kikurage.devicestatus.infrastructure.database.record.DeviceStatusRecord
+import org.springframework.stereotype.Repository
 
+@Suppress("SpringJavaInjectionPointsAutowiringInspection")
+@Repository
 class DeviceStatusRepositoryImpl(
     private val deviceStatusMapper: DeviceStatusMapper
 ) : DeviceStatusRepository {
