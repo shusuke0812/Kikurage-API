@@ -66,9 +66,7 @@ components:
       required:
         - temperature
         - humidity
-        - message
-        - type
-        - advice
+        - status_type
       properties:
         temperature:
           type: integer
@@ -76,16 +74,13 @@ components:
         humidity:
           type: integer
           example: 60
-        message:
-          type: string
-          example: "喉が渇いたよ"
-        type:
+        status_type:
           type:
-            $ref: '#/components/schemas/DeviceStatusType'
-          example: "wet"
-    DeviceStatusType:
+            $ref: '#/components/schemas/StatusType'
+          example: "WET"
+    StatusType:
       type: string
       enum:
-        - normal
-        - wet
-        - dry
+        - NORMAL
+        - WET
+        - DRY
