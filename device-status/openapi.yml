@@ -15,7 +15,7 @@ tags:
   - name: UserCultivationController
   - name: UserRecipeController
 paths:
-  /{deviceId}/status:
+  /device/status/{deviceId}:
     get:
       tags:
         - DeviceStatusController
@@ -40,7 +40,7 @@ paths:
       tags:
         - DeviceStatusController
       summary: for M5Stack
-  /{deviceId}/status/graph:
+  /device/status/{deviceId}/graph:
     get:
       tags:
         - DeviceStatusGraphController
