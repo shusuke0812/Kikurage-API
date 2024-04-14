@@ -21,9 +21,8 @@ class DeviceStatusService(
     }
 
     @Transactional
-    fun update(deviceId: Long, temperature: Int, humidity: Int) {
+    fun update(deviceId: Long, temperature: Int, humidity: Int, statusType: StatusType) {
         deviceStatusRepository.findStatus(deviceId) ?: throw IllegalArgumentException("Not found Device ID: $deviceId")
-        // TODO: StatusType変換処理を追加
-        deviceStatusRepository.update(deviceId, temperature, humidity, StatusType.NORMAL)
+        deviceStatusRepository.update(deviceId, temperature, humidity, statusType)
     }
 }
