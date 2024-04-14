@@ -28,7 +28,6 @@ data class UpdateDeviceStatusRequest(
 
 
 data class RegisterDeviceRequest(
-    val deviceId: Long,
     val temperature: Int = 25,
     val humidity: Int = 70,
     val statusType: StatusType = StatusType.NORMAL

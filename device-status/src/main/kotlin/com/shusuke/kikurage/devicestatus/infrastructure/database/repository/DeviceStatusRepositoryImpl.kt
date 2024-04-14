@@ -5,6 +5,7 @@ import com.shusuke.kikurage.devicestatus.domain.model.DeviceStatus
 import com.shusuke.kikurage.devicestatus.domain.repository.DeviceStatusRepository
 import com.shusuke.kikurage.devicestatus.infrastructure.database.mapper.*
 import com.shusuke.kikurage.devicestatus.infrastructure.database.record.DeviceStatusRecord
+import org.mybatis.dynamic.sql.util.kotlin.mybatis3.select
 import org.springframework.stereotype.Repository
 
 @Suppress("SpringJavaInjectionPointsAutowiringInspection")
@@ -12,6 +13,13 @@ import org.springframework.stereotype.Repository
 class DeviceStatusRepositoryImpl(
     private val deviceStatusMapper: DeviceStatusMapper
 ) : DeviceStatusRepository {
+
+    override fun countAllRows(): Long {
+        val rows = deviceStatusMapper.count {
+            allRows()
+        }
+        return rows
+    }
     override fun findStatus(deviceId: Long): DeviceStatus? {
         return deviceStatusMapper.selectByPrimaryKey(deviceId)?.let { toModel(it) }
     }
