@@ -3,9 +3,9 @@ info:
   version: 0.1.0
   title: Kikurage Device Status API
   description: |
-    Data: Device Status, User information 
+    Data: Device Status, User information
 
-    Client: Mobile app, Device(M5Stack)
+    Client: Mobile app, Device(M5Stack), Admin portal
 servers:
   - url: 'http://localhost:8080'
 tags:
