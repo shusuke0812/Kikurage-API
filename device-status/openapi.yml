@@ -92,6 +92,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RegisterDeviceResponse'
+  /admin/device/delete/{deviceId}:
+    delete:
+      tags:
+        - AdminDeviceController
+      summary: for Admin portal
+      description: Delete device
+      parameters:
+        - in: path
+          name: deviceId
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: Device unique ID, which is pasted with label in M5Stack device
+      response:
+        '201':
+          description: successful operation
 components:
   schemas:
     GetDeviceStatusResponse:

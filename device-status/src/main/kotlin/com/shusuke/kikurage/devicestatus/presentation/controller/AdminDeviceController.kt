@@ -3,6 +3,8 @@ package com.shusuke.kikurage.devicestatus.presentation.controller
 import com.shusuke.kikurage.devicestatus.application.AdminDeviceService
 import com.shusuke.kikurage.devicestatus.presentation.form.RegisterDeviceRequest
 import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -21,5 +23,10 @@ class AdminDeviceController(
             request.humidity,
             request.statusType
         )
+    }
+
+    @DeleteMapping("/delete/{device_id}")
+    fun delete(@PathVariable("device_id") deviceId: Long) {
+        adminDeviceService.delete(deviceId)
     }
 }
