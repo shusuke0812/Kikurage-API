@@ -44,7 +44,8 @@ class DeviceStatusRepositoryImpl(
         return DeviceStatusRecord(
             deviceId = model.deviceId,
             temperature = model.temperature,
-            humidity = model.humidity
+            humidity = model.humidity,
+            statusType = model.statusType
         )
     }
 }
