@@ -20,4 +20,10 @@ class AdminDeviceService(
             statusType
         ))
     }
+
+    @Transactional
+    fun delete(deviceId: Long) {
+        deviceStatusRepository.findStatus(deviceId) ?: throw IllegalArgumentException("Not found Device ID: $deviceId")
+        deviceStatusRepository.delete(deviceId)
+    }
 }

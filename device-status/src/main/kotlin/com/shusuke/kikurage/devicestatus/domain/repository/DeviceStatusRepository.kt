@@ -8,4 +8,5 @@ interface DeviceStatusRepository {
     fun findStatus(deviceId: Long): DeviceStatus?
     fun register(status: DeviceStatus)
     fun update(deviceId: Long, temperature: Int, humidity: Int, statusType: StatusType)
+    fun delete(deviceId: Long)
 }

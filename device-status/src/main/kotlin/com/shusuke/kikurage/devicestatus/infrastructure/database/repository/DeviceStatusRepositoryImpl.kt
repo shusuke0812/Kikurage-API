@@ -31,6 +31,10 @@ class DeviceStatusRepositoryImpl(
         deviceStatusMapper.updateByPrimaryKeySelective(DeviceStatusRecord(deviceId, temperature, humidity, statusType))
     }
 
+    override fun delete(deviceId: Long) {
+        deviceStatusMapper.deleteByPrimaryKey(deviceId)
+    }
+
     private fun toModel(record: DeviceStatusRecord): DeviceStatus {
         return DeviceStatus(
             deviceId = record.deviceId!!,
