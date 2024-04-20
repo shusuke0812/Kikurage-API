@@ -36,3 +36,7 @@ $ docker-compose up -d
 ```bash
 $ htpasswd -n -B pass
 ```
+
+### Reference
+- OpenAPI
+  - [Data types](https://spec.openapis.org/oas/latest.html#data-types)
