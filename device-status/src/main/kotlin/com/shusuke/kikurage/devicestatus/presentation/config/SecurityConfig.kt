@@ -85,7 +85,7 @@ class SecurityConfig(
         val config = CorsConfiguration()
         config.addAllowedMethod(CorsConfiguration.ALL)
         config.addAllowedHeader(CorsConfiguration.ALL)
-        config.addAllowedOrigin("http://localhost:8081")
+        config.addAllowedOrigin("http://localhost:8003")
         config.allowCredentials = true
 
         val corsConfigurationSource = UrlBasedCorsConfigurationSource()
