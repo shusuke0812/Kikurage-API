@@ -31,6 +31,9 @@ dependencies {
 	implementation("mysql:mysql-connector-java:8.0.23")
 	mybatisGenerator("org.mybatis.generator:mybatis-generator-core:1.4.0")
 
+	// Auth
+	implementation("org.springframework.boot:spring-boot-starter-security")
+
 	// Test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3")
