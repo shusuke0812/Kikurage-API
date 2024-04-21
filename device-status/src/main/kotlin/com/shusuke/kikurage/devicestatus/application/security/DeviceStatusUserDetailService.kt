@@ -22,7 +22,7 @@ data class DeviceStatusUserDetails(
     val id: Long,
     val deviceId: Long,
     val email: String,
-    val password: String,
+    val pass: String, // NOTE: You should name `pass`. if you set `password` for example, there are errors "the following declarations have the same JVM signature (getPassword()Ljava/lang/String".
     val roleType: RoleType,
     val createdAt: Date,
     val updatedAt: Date
@@ -46,7 +46,7 @@ data class DeviceStatusUserDetails(
     }
 
     override fun getPassword(): String {
-        return this.password
+        return this.pass
     }
 
     override fun isAccountNonExpired(): Boolean {
