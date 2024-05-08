@@ -35,6 +35,7 @@ class SecurityConfig(
     @Bean
     fun configure(http: HttpSecurity): SecurityFilterChain {
         http {
+            // ******************* Authorize *******************
             authorizeHttpRequests {
                 authorize("/login", permitAll)
                 authorize("/admin/**", hasAnyAuthority(RoleType.ADMIN.toString()))
@@ -42,21 +43,16 @@ class SecurityConfig(
             }
             csrf { disable() }
             httpBasic { disable() }
+            // ******************* Authenticate ****************
             formLogin {
                 loginProcessingUrl = "/login"
+                permitAll() // TODO: addUsernameParam, passwordParam using security package 6.3.0 (https://github.com/spring-projects/spring-security/pull/14488)
                 authenticationSuccessHandler = DeviceStatusAuthenticationSuccessHandler()
                 authenticationFailureHandler = DeviceStatusAuthenticationFailureHandler()
-                // TODO: addUsernameParam, passwordParam using security package 6.3.0 (https://github.com/spring-projects/spring-security/pull/14488)
             }
             exceptionHandling {
-                defaultAuthenticationEntryPointFor(
-                    entryPoint = DeviceStatusAuthenticationEntryPoint(),
-                    preferredMatcher = AntPathRequestMatcher("/device/**")
-                )
-                defaultAccessDeniedHandlerFor(
-                    deniedHandler = DeviceStatusAccessDeniedHandler(),
-                    preferredMatcher = AntPathRequestMatcher("/device/**")
-                )
+                authenticationEntryPoint = DeviceStatusAuthenticationEntryPoint()
+                accessDeniedHandler = DeviceStatusAccessDeniedHandler()
             }
             cors {
                 configurationSource = corsConfigurationSource()
