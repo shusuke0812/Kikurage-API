@@ -46,7 +46,8 @@ class SecurityConfig(
             // ******************* Authenticate ****************
             formLogin {
                 loginProcessingUrl = "/login"
-                permitAll() // TODO: addUsernameParam, passwordParam using security package 6.3.0 (https://github.com/spring-projects/spring-security/pull/14488)
+                usernameParameter = "email"
+                passwordParameter = "pass"
                 authenticationSuccessHandler = DeviceStatusAuthenticationSuccessHandler()
                 authenticationFailureHandler = DeviceStatusAuthenticationFailureHandler()
             }
